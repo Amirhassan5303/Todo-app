@@ -8,21 +8,54 @@ function TodoApp() {
 
   const [inputValue, setInputValue] = useState("");
 
+  function handleAddTodo() {
+    if (inputValue.trim === "") return;
+
+    const newTodo = {
+      id: Date.now(),
+      text: inputValue,
+      isCompleted: false,
+    };
+    setTodos([...todos, newTodo]);
+    setInputValue("");
+  }
+
   return (
-    <div style={{ maxWidth: "400px", margin: "0 auto", textAlign: "center" }}>
+    <div
+      style={{
+        maxWidth: "400px",
+        margin: "0 auto",
+        textAlign: "center",
+        fontFamily: "tahoma",
+      }}
+    >
       <h2>Todos list</h2>
       <div>
         <input
+          style={{ padding: "8px", width: "200px" }}
           type="text"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           placeholder="New task"
         />
-        <button>Add</button>
+        <button
+          onClick={handleAddTodo}
+          style={{ padding: "8px 15px", marginRight: "5px" }}
+        >
+          Add
+        </button>
       </div>
-      <ul>
+      <ul style={{ listStyle: "none", padding: 0, marginTop: "20px" }}>
         {todos.map((todo) => (
-          <li key={todo.id} style={{ margin: "10px auto" }}>
+          <li
+            key={todo.id}
+            style={{
+              margin: "10px 0",
+              backgroundColor: "#f4f4f4",
+              padding: "10px",
+              borderRadius: "5px",
+            }}
+          >
             <span
               style={{
                 textDecoration: todo.isCompleted ? "line-throgh" : "none",
