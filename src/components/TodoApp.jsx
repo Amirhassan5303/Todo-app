@@ -20,6 +20,11 @@ function TodoApp() {
     setInputValue("");
   }
 
+  function handleDeleteTodo(id) {
+    const updatedTodo = todos.filter((todo) => todo.id != id);
+    setTodos(updatedTodo);
+  }
+
   return (
     <div
       style={{
@@ -58,12 +63,17 @@ function TodoApp() {
           >
             <span
               style={{
-                textDecoration: todo.isCompleted ? "line-throgh" : "none",
+                textDecoration: todo.isCompleted ? "line-through" : "none",
               }}
             >
               {todo.text}
             </span>
-            <button style={{ marginRight: "10px" }}>حذف</button>
+            <button
+              style={{ marginLeft: "10px" }}
+              onClick={() => handleDeleteTodo(todo.id)}
+            >
+              حذف
+            </button>
           </li>
         ))}
       </ul>
