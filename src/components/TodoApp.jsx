@@ -25,6 +25,16 @@ function TodoApp() {
     setTodos(updatedTodo);
   }
 
+  function handleToggleTodo(id) {
+    const updatedTodos = todos.map((todo) => {
+      if (todo.id == id) {
+        return { ...todo, isCompleted: !todo.isCompleted };
+      }
+      return todo;
+    });
+    setTodos(updatedTodos);
+  }
+
   return (
     <div
       style={{
@@ -62,8 +72,12 @@ function TodoApp() {
             }}
           >
             <span
+              onClick={() => {
+                handleToggleTodo(todo.id);
+              }}
               style={{
                 textDecoration: todo.isCompleted ? "line-through" : "none",
+                cursor: "pointer",
               }}
             >
               {todo.text}
